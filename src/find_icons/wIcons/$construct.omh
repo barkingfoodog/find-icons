@@ -1,0 +1,8 @@
+Do code method cGetIcons/GetIconList1 Returns ilInstances
+
+Do ilIcons.$cols.$add("ICONID",kInteger,k32bitint)
+Do ilIcons.$merge(ilInstances,kTrue)
+Do ilIcons.$cols.ICONID.$removeduplicates(kTrue)
+
+Calculate ilIcons.$line as 1
+Do $cinst.$_loadIconInstances()

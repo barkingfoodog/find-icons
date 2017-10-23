@@ -1,0 +1,29 @@
+{
+	"classtype": "kCode",
+	"internalversion": 6,
+	"cvardefs": [
+		{
+			"name": "NrModified",
+			"order": 1,
+			"type": "kInteger",
+			"subtype": "k32bitint",
+			"sublen": 0,
+			"initval": "0"
+		}
+	],
+	"properties": {
+		"collectperformancedata": false,
+		"componenticon": 0,
+		"componenttype": "kCompStoreHidden",
+		"createdate": "2017-10-18 17:27:38",
+		"desc": "",
+		"designtaskname": "Startup_Task",
+		"editor": "",
+		"editordata": "",
+		"external": true,
+		"moddate": "2017-10-23 11:22:51",
+		"showascheckedout": false,
+		"userinfo": "",
+		"version": ""
+	}
+}

@@ -1,0 +1,4 @@
+Calculate ilIconInstances as ilInstances
+Do ilIconInstances.$search($ref.ICONID<>ilIcons.ICONID,1,0,1,1)
+Do ilIconInstances.$remove(kListDeleteSelected)
+Redraw

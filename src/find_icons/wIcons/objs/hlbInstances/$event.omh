@@ -1,0 +1,17 @@
+On evClick     ;; Event Parameters - pRow ( Itemreference )
+	
+On evDoubleClick     ;; Event Parameters - pRow ( Itemreference )
+	Modify class {[ilInstances.CLASSNAME]}
+	
+On evHeaderClick
+	If pColumnNumber=iiInstancesLastSortColumn
+		Calculate ibInstancesSortDescending as not(ibInstancesSortDescending)
+	Else
+		Calculate ibInstancesSortDescending as kFalse
+	End If
+	
+	Calculate lcColumnName as ilInstances.$cols.$findident(pColumnNumber).$name
+	Do ilInstances.$sort($ref.[lcColumnName],ibInstancesSortDescending)
+	Calculate iiInstancesLastSortColumn as pColumnNumber
+	
+	Redraw

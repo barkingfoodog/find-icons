@@ -1,0 +1,1 @@
+Do $windows.wIcons.$open("*",kWindowCenter)

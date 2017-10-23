@@ -1,0 +1,52 @@
+;  Do #L1.$cols.$add('LIBNAME',kCharacter,kSimplechar,10000000)
+;  Do #L1.$cols.$add('CLASSNAME',kCharacter,kSimplechar,10000000)
+;  Do #L1.$cols.$add('OBJNAME',kCharacter,kSimplechar,10000000)
+;  Do #L1.$cols.$add('SIZE',kCharacter,kSimplechar,10000000)
+;  Do #L1.$cols.$add('ICONID',kCharacter,kSimplechar,10000000)
+
+Do ParentRef.$objs.$makelist($ref.$name,$ref.$objtype) Returns ChildList
+
+Calculate ClassName as ParentRef.$class().$name
+Calculate LibName as con(ParentRef.$lib().$name)
+If LibName<>'ONLINE'
+	Calculate ClassName as con(LibName,'.',ClassName)
+End If
+
+Do ChildList.$search($ref.C2=kPushbutton)
+
+For ChildList.$line from 1 to ChildList.$linecount step 1
+	If ChildList.0.$selected
+		Set reference ItemRef to ParentRef.$objs.[ChildList.C1]
+		If ItemRef.$iconid.$cando
+			Calculate lIconId as ItemRef.$iconid
+			If lIconId<>0&lIconId<>k16x16&lIconId<>k32x32&lIconId<>k48x48
+				If lIconId>k16x16&lIconId<k32x32
+					Calculate lIconId as lIconId-k16x16
+					Do #L1.$add(LibName,ClassName,ItemRef.$name,'k16x16',lIconId)
+				Else If lIconId>k32x32&lIconId<k48x48
+					Calculate lIconId as lIconId-k32x32
+					Do #L1.$add(LibName,ClassName,ItemRef.$name,'k32x32',lIconId)
+				Else If lIconId>k48x48&lIconId<0
+					Calculate lIconId as lIconId-k48x48
+					Do #L1.$add(LibName,ClassName,ItemRef.$name,'k48x48',lIconId)
+				Else
+					Do #L1.$add(LibName,ClassName,ItemRef.$name,'',lIconId)
+				End If
+			End If
+		End If
+	End If
+End For
+
+Do ChildList.$search(not($ref.C2=kPushbutton))
+
+For ChildList.$line from 1 to ChildList.$linecount step 1
+	If ChildList.0.$selected
+		Set reference ItemRef to ParentRef.$objs.[ChildList.C1]
+		Calculate TList as ItemRef.$objs.$makelist($ref.$name)
+		If TList.$linecount>0
+			Do method child (ItemRef)
+		End If
+	End If
+End For
+
+Quit method

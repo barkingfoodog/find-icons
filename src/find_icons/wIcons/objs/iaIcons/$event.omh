@@ -1,0 +1,4 @@
+On evClick
+	Do $cinst.$_loadIconInstances()
+	
+On evDoubleClick

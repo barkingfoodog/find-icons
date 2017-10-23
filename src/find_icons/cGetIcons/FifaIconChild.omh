@@ -1,0 +1,42 @@
+
+Do ParentRef.$objs.$makelist($ref.$name,$ref.$objtype) Returns ChildList
+
+Calculate ClassName as ParentRef.$class().$name
+Calculate LibName as con(ParentRef.$lib().$name)
+If LibName<>'ONLINE'
+	Calculate ClassName as con(LibName,'.',ClassName)
+End If
+
+Calculate lClassCheckedOut as ParentRef.$class().$showascheckedout
+
+For ChildList.$line from 1 to ChildList.$linecount step 1
+	Set reference ItemRef to ParentRef.$objs.[ChildList.C1]
+	If ItemRef.$iconid.$canassign
+		Calculate #1 as ItemRef.$iconid
+		If #1=11304|#1=k16x16+11304
+			Breakpoint
+			If not(lClassCheckedOut)
+				Calculate ItemRef.$class().$showascheckedout as kTrue
+			End If
+			Calculate ItemRef.$iconid as k16x16+11305
+			Calculate ItemRef.$tooltip as 'Spanish'
+			Save class {[ClassName]}
+			Save class {[ClassName]}
+			If not(lClassCheckedOut)
+				Calculate ItemRef.$class().$showascheckedout as kFalse
+			End If
+			Do #L1.$add(#1,ItemRef.$fullname)
+			
+		End If
+	End If
+End For
+
+For ChildList.$line from 1 to ChildList.$linecount step 1
+	Set reference ItemRef to ParentRef.$objs.[ChildList.C1]
+	Calculate TList as ItemRef.$objs.$makelist($ref.$name)
+	If TList.$linecount>0
+		Do method FifaIconChild (ItemRef)
+	End If
+End For
+
+Quit method

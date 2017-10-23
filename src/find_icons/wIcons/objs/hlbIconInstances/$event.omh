@@ -1,0 +1,17 @@
+On evClick     ;; Event Parameters - pRow ( Itemreference )
+	
+On evDoubleClick     ;; Event Parameters - pRow ( Itemreference )
+	Modify class {[ilIconInstances.CLASSNAME]}
+	
+On evHeaderClick
+	If pColumnNumber=ilIconInstancesLastSortColumn
+		Calculate ibIconInstancesSortDirection as not(ibIconInstancesSortDirection)
+	Else
+		Calculate ibIconInstancesSortDirection as kFalse
+	End If
+	
+	Calculate lcColumnName as ilIconInstancesLastSortColumn.$cols.$findident(pColumnNumber).$name
+	Do ilIconInstances.$sort($ref.[lcColumnName],ibIconInstancesSortDirection)
+	Calculate ilIconInstancesLastSortColumn as pColumnNumber
+	
+	Redraw

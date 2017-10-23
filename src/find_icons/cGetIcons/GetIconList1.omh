@@ -1,0 +1,12 @@
+;  Get icon id list
+
+Do #L1.$define()
+Do #L1.$cols.$add('LIBNAME',kCharacter,kSimplechar,10000000)
+Do #L1.$cols.$add('CLASSNAME',kCharacter,kSimplechar,10000000)
+Do #L1.$cols.$add('OBJNAME',kCharacter,kSimplechar,10000000)
+Do #L1.$cols.$add('SIZE',kCharacter,kSimplechar,10000000)
+Do #L1.$cols.$add('ICONID',kCharacter,kSimplechar,10000000)
+
+Do method GetIconList2
+
+Quit method #L1

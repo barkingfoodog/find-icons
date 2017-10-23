@@ -1,0 +1,36 @@
+;  Loop through windows and change a specific icon with a specific iconid to another
+
+Calculate NrModified as 0
+
+Set reference ParentRef to $prefs
+
+Calculate ParentRef.$alloweditifnotcheckedout as kTrue
+Calculate $prefs.$maxcachedclasses as 1000
+Calculate $modes.$stacklimit as 30
+
+Working message  {[LibName].[ParentRef.$name]//[NrModified]}
+
+Do #L1.$define(#1,#S1,#2,#3,#4)
+
+;  Enter your initialization code here
+Do $libs.$makelist($ref.$name) Returns LibList
+For LibList.$line from 1 to LibList.$linecount step 1
+	Do $libs.[LibList.C1].$classes.$makelist($ref.$name,$ref.$classtype=kWindow) Returns ClassList
+	Do ClassList.$search($ref.C2=1)
+	Do ClassList.$remove(kListKeepSelected)
+	
+	For ClassList.$line from 1 to ClassList.$linecount step 1
+		Set reference ParentRef to $libs.[LibList.C1].$classes.[ClassList.C1]
+		Calculate LibName as con(ParentRef.$lib().$name)
+		
+		Redraw working message
+		
+		Do method FifaIconChild (ParentRef)
+		
+	End For
+	
+End For
+
+Do #L1.$sort($ref.C1)
+Calculate #L2 as #L1
+Do #L2.$cols.1.$removeduplicates(kTrue)
