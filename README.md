@@ -2,6 +2,9 @@
 
 Find icons will search any open libraries and display a list of `$iconid` values in use.
 
+## Installation
+Download [find_icons.lbs](lib/8.1/find_icons.lbs).
+
 ## Usage
  1. Open one or more libraries to search
  2. Open `find_icons.lbs`
